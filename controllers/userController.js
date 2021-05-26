@@ -21,6 +21,7 @@ exports.createUser=async (req,res)=>{
         const salt=await bcryptjs.genSalt(10);
         newUser.password=await bcryptjs.hash(password,salt);
         newUser.role=role;
+        newUser.status='enabled';
         
         //crea el nuevo usuario
         user=new User(newUser);
@@ -82,7 +83,7 @@ exports.updateUser=async (req,res)=>{
             return res.status(400).json({msg:'User Not Found'});
         }
 
-        const {firstName,lastName,userName,email,password,role}=req.body;
+        const {firstName,lastName,userName,email,password,role,status}=req.body;
         const newUser={};
     
         newUser.firstName=firstName;
@@ -93,6 +94,7 @@ exports.updateUser=async (req,res)=>{
         const salt=await bcryptjs.genSalt(10);
         newUser.password=await bcryptjs.hash(password,salt);
         newUser.role=role;
+        newUser.status=status;
 
         // actualizar
         user = await User.findByIdAndUpdate({ _id: req.params.id }, { $set : newUser}, { new: true });

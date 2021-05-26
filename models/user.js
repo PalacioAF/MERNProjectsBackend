@@ -29,6 +29,9 @@ const UsuarioSchema=mongoose.Schema({
         type:String,
         trim:true
     },
+    status: {
+        type:String
+    },
     register:{
         type:Date,
         default:Date.now()
