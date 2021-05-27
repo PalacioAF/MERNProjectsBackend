@@ -3,7 +3,7 @@ const Proyect = require('../models/proyect');
 
 exports.createTask=async (req,res)=>{
     try {
-        const {name,description,status,proyect}=req.body;
+        const {name,description,proyect,user}=req.body;
         const newTask={};
 
         const ProyectPresent = await Proyect.findById(proyect);
@@ -19,8 +19,9 @@ exports.createTask=async (req,res)=>{
     
         newTask.name=name;
         newTask.description=description;
-        newTask.status=status;
+        newTask.status='Backlog';
         newTask.proyect=proyect;
+        newTask.user=user;
         
         //crea el nuevo usuario
         task=new Task(newTask);
@@ -55,11 +56,7 @@ exports.getTask = async (req, res) => {
 
 exports.updateTask=async (req,res)=>{
     try {
-        const {name,description,status,proyect}=req.body;
-        const ProyectPresent = await Proyect.findById(proyect);
-        if(!ProyectPresent) {
-            return res.status(404).json({msg: 'Project Not Found'})
-        }
+        const {name,description,user}=req.body;
         
         let task = await Task.findById(req.params.id);
         if(!task){
@@ -70,8 +67,7 @@ exports.updateTask=async (req,res)=>{
     
         newTask.name=name;
         newTask.description=description;
-        newTask.status=status;
-        newTask.proyect=proyect;
+        newTask.user=user;
 
         // actualizar
         task = await Task.findByIdAndUpdate({ _id: req.params.id }, { $set : newTask}, { new: true });
