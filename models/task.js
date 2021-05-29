@@ -15,11 +15,11 @@ const TaskSchema = mongoose.Schema({
     },
     proyect: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Proyects'
+        ref: 'proyects'
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Users'
+        ref: 'users'
     }
 });
 

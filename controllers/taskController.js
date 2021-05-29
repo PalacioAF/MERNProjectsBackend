@@ -46,7 +46,7 @@ exports.getTask = async (req, res) => {
         if(!ProyectPresent) {
             return res.status(404).json({msg: 'Project Not Found'})
         }
-        const tasks = await Task.find({ proyect });
+        const tasks = await Task.find({ proyect }).populate('user')
         res.json({ output:tasks });
     } catch (error) {
         res.status(500).send('An error occurred please try again');
