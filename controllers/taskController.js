@@ -56,7 +56,7 @@ exports.getTask = async (req, res) => {
 
 exports.updateTask=async (req,res)=>{
     try {
-        const {name,description,user}=req.body;
+        const {name,description,user,status}=req.body;
         
         let task = await Task.findById(req.params.id);
         if(!task){
@@ -68,6 +68,7 @@ exports.updateTask=async (req,res)=>{
         newTask.name=name;
         newTask.description=description;
         newTask.user=user;
+        if(status){newTask.status=status}
 
         // actualizar
         task = await Task.findByIdAndUpdate({ _id: req.params.id }, { $set : newTask}, { new: true });
@@ -78,6 +79,7 @@ exports.updateTask=async (req,res)=>{
         res.status(500).json({msg:'An error occurred please try again'});
     }
 }
+
 
 exports.deleteTask = async (req, res ) => {
     try {

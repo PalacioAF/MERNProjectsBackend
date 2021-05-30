@@ -90,9 +90,11 @@ exports.updateUser=async (req,res)=>{
         newUser.lastName=lastName;
         newUser.userName=userName;
         newUser.email=email;
+        if(password!==user.password){
         //Hashear el password
         const salt=await bcryptjs.genSalt(10);
         newUser.password=await bcryptjs.hash(password,salt);
+        }
         newUser.role=role;
         newUser.status=status;
 
