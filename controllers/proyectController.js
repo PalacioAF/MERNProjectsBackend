@@ -36,10 +36,10 @@ exports.getProyect = async (req, res) => {
         // Obtener Proyectos
         let proyects
         if(req.user.role=="admin"){
-             proyects = await Proyect.find().populate('team')
+             proyects = await Proyect.find().populate('team').populate('creator')
         }
         else if(req.user.role=="user"){
-             proyects = await Proyect.find({team:req.user.id}).populate('team')
+             proyects = await Proyect.find({team:req.user.id}).populate('team').populate('creator')
 
         }
         res.json({ output:proyects });
