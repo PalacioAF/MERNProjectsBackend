@@ -6,12 +6,12 @@ const auth = require('../middleware/auth');
 
 // api/Proyect
 
-router.post('/',ProyectController.createProyect);
+router.post('/',auth,ProyectController.createProyect);
 
 router.get('/',auth,ProyectController.getProyect);
 
-router.put('/:id',ProyectController.updateProyect);  
+router.put('/:id',auth,ProyectController.updateProyect);  
 
-router.delete('/:id',ProyectController.deleteProyect);
+router.delete('/:id',auth,ProyectController.deleteProyect);
 
 module.exports=router;

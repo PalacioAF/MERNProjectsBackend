@@ -39,7 +39,7 @@ exports.createUser=async (req,res)=>{
 
         //firmar el JWT
         jwt.sign(payload,process.env.SECRET,{
-            expiresIn:3600
+            expiresIn:300
         },(error,token)=>{
             if(error) throw error;
             //Mensaje
